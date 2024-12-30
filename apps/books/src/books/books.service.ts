@@ -1,5 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Book, CreateBookDto, UpdateBookDto } from '@app/contracts/books';
+import { RpcException } from '@nestjs/microservices';
+import { STATUS_CODES } from 'node:http';
+import { NotFoundRpcException } from 'libs/errors/exception';
 
 @Injectable()
 export class BooksService {
@@ -34,7 +37,7 @@ export class BooksService {
     const bookIndex = this.books.findIndex((book) => book.id === id);
 
     if (bookIndex === -1) {
-      throw new NotFoundException(`Book with id ${id} not found`);
+      throw new NotFoundRpcException(`Book with id ${id} not found`);
     }
     return this.books[bookIndex];
   }

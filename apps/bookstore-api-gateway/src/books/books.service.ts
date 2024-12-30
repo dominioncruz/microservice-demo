@@ -4,9 +4,9 @@ import {
   CreateBookDto,
   UpdateBookDto,
 } from '@app/contracts/books';
-import { Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable()
 export class BooksService {
